@@ -1,0 +1,44 @@
+{% extends "polls/base_generic.html" %}
+
+{% block header %}
+
+<h1>{{ question.question_text }}</h1>
+<h2>Created by <a href="{% url 'polls:author_detail' question.author.id %}">{{ question.author }}</a> on {{ question.pub_date }}</h2>
+
+{% endblock %}
+
+{% block content %}
+
+{% if voted_choice %}
+    <p><strong>You are already voted!</strong></p>
+{% else %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"  {% if voted_choice %} disabled {% endif %} {% if choice == voted_choice %} checked {% endif %}>
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+<input type="submit" value="Vote" {% if voted_choice %} disabled {% endif %}>
+</form>
+
+<br/>
+
+<a href="{% url 'polls:results' question.id %}"><button>Results</button></a>
+{% if question.author.user == user %}
+<a href="{% url 'polls:delete_question' question.id %}"><button class="delete-button" >Delete</button></a>
+{% endif %}
+<div id="comment-section">
+    <h3>Comments:</h3>
+    {% for comment in comments %}
+        {% include 'polls/comment_form.html' %}
+    {% endfor %}
+    <form method="POST" action="{% url 'polls:add_comment' question.id %}">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}

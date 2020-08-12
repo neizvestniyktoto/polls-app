@@ -1,0 +1,10 @@
+{% extends 'polls/base_generic.html' %}
+
+{% block content %}
+    <form action="{% url 'polls:author_settings' %}" method="post">
+        {% csrf_token %}
+        {% include 'polls/author_form.html' %}
+        <input type="submit" value="Submit">
+        <a href="{% url 'polls:author_detail' user.author.id %}"><button>Cancel</button></a>
+    </form>
+{% endblock %}

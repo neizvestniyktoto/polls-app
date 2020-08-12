@@ -1,0 +1,23 @@
+<p>
+    {% if form.username.errors %}
+        {{form.username.errors}}<br/>
+    {% endif %}
+    {{ form.username.label }}: {{ form.username }} {{ form.username.help_text }}<br/>
+    {% if form.email.errors %}
+        {{form.email.errors}}<br/>
+    {% endif %}
+    {{ form.email.label}}: {{ form.email }}<br/>
+
+    {% include 'polls/author_form.html' %}
+
+    {% if form.password1.errors %}
+        {{form.password1.errors}}<br/>
+    {% endif %}
+
+    {{ form.password1.label }}: {{ form.password1 }} {{ form.password1.help_text }}<br />
+
+    {% if form.password2.errors %}
+        {{form.password2.errors}}<br/>
+    {% endif %}
+    {{ form.password2.label }}: {{ form.password2 }} {{ form.password2.help_text }}<br />
+</p>

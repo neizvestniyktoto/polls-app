@@ -1,0 +1,4 @@
+<div id="comment{{ comment.id }}" style="padding-left:{{ comment.1 }}px">
+    <a href="{% url 'polls:author_detail' question.author.id %}">{{ question.author }}</a>
+    <p>{{ comment.0 }}</p>
+</div>

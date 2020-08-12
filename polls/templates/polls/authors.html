@@ -1,0 +1,9 @@
+{% extends 'polls/base_generic.html' %}
+
+{% block content %}
+<ul>
+{% for author in authors_list %}
+    <li><a href="{% url 'polls:author_detail' author.id %}">{{ author }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

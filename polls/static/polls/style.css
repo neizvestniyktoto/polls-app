@@ -1,0 +1,25 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+    background-color: #a39f99;
+}
+
+.home-url {
+    color: white;
+}
+
+.errorlist {
+    list-style: none;
+    padding-left: 0;
+    color: red;
+}
+
+a button {
+    color: black;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+}

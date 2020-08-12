@@ -1,0 +1,20 @@
+{% extends 'polls/base_generic.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  <p>You are already logged in</p>
+  <a href="{% url 'logout' %}?next={{request.path}}">Logout</a>
+{% else %}
+
+    <h2>Регистрация</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% include 'polls/signup_form.html' %}
+
+    <button type="submit">Отправить</button>
+    </form>
+
+{% endif %}
+
+{% endblock %}

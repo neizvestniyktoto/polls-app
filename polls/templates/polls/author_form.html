@@ -1,0 +1,6 @@
+<p>
+    {{ form.first_name.label}}: {{ form.first_name }}<br/>
+    {{ form.last_name.label}}: {{ form.last_name }}<br/><br/>
+
+    Enter your birth date: <input type="date" name="birth_date" min="{{ form.min }}" max="{{ form.max }}">
+</p>

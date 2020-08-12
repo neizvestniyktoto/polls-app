@@ -1,0 +1,10 @@
+{% extends 'polls/base_generic.html' %}
+
+{% block content %}
+    <h1>Are you sure you want to delete question <a href="{% url 'polls:detail' question.id %}">{{ question }}</h1>
+    <form action="{% url 'polls:delete_question' question.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Yes">
+        <a class="button" href="{% url 'polls:detail' question.id %}">No</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "polls/base_generic.html" %}
+
+{% block content %}
+<form action="{% url 'polls:add_poll' %}" method="post">
+    {% csrf_token %}
+    <table id="question_table">
+        {{ question_form }}
+    </table>
+    <input type="button" id="add_choice" value="Add choice">
+    <br/>
+    <table id="choice_table">
+    </table>
+    <script>
+        const button = document.getElementById('add_choice');
+
+        var count = 0;
+
+        {% for choice in choices %}
+            input_value = "{{choice}}";
+            addNewChoice();
+        {% endfor %}
+
+        input_value = "";
+
+        function addNewChoice() {
+            count++;
+
+            var newChoice = document.createElement("tbody");
+            newChoice.innerHTML = `{% include 'polls/choice_template.html' %}`;
+
+            choice_div = document.getElementById('choice_table');
+            choice_div.appendChild(newChoice);
+        }
+
+        {% if not choices %}
+            addNewChoice();
+            addNewChoice();
+        {% endif %}
+
+        button.addEventListener('click', addNewChoice);
+    </script>
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

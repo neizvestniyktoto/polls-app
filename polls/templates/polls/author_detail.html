@@ -1,0 +1,31 @@
+{% extends "polls/base_generic.html" %}
+
+{% block content %}
+
+<h1>
+    {{ author }}
+    {% if author == user.author %} <a href="{% url 'polls:author_settings'%}">
+        <img src="https://img.icons8.com/cotton/64/000000/settings--v1.png"/>
+    </a>
+{% endif %}
+</h1>
+
+{% if author.birth_date %}
+    <h2>Born on {{ author.birth_date }}</h2>
+{% endif %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if author.question_set.all %}
+    <p>Related questions:</p>
+    <ul>
+        {% for question in author.question_set.all %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <p>No related questions yet!</p>
+{% endif %}
+
+{% endblock %}

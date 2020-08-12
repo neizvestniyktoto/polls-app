@@ -1,0 +1,20 @@
+{% extends "polls/detail.html" %}
+
+{% block content %}
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>
+        {{ choice.choice_text }} -- {{ choice.votes.all|length }} vote{{ choice.votes|pluralize }}
+        {% if choice == voted_choice %} (You) {% endif %}
+    </li>
+{% endfor %}
+</ul>
+
+{% if voted_choice %}
+    <a href="{% url 'polls:re-vote' question.id %}"><button>Re-vote</button></a>
+{% else %}
+    <a href="{% url 'polls:detail' question.id %}"><button>Vote</button></a>
+{% endif %}
+
+{% endblock %}
